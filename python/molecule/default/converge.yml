@@ -1,0 +1,21 @@
+---
+
+- name: All Nodes
+  hosts: all
+  roles:
+    - python
+
+  post_tasks:
+    - name: "Print quick check"
+      debug:
+        var: quick_check.stdout_lines
+
+    - name: "Quick installed packages check"
+      shell: |
+        python -V
+        pip -V
+      register: quick_check
+
+    - name: "Print Quick installed packages check"
+      debug:
+        var: quick_check.stdout_lines

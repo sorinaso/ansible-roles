@@ -1,0 +1,7 @@
+---
+
+proxmox_vm_user_home: /root
+proxmox_vm_user: root
+proxmox_vm_ssh_directory: "{{ proxmox_vm_user_home }}/.ssh"
+proxmox_vm_ssh_directory_mode: "700"
+proxmox_vm_ssh_public_key: "{{ proxmox_vm_ssh_directory }}/id_rsa.pub"

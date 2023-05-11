@@ -1,0 +1,11 @@
+---
+# vars file for python
+python_package_name: "python{{ python_version | replace('.', '') }}"
+python_version_major: "{{ python_version.split('.')[0] }}"
+python_packages: ["{{python_package_name}}"]
+python_default_executable_path: "/usr/bin/python"
+python_version_executable_path: "/usr/bin/python{{ python_version }}"
+python_pip_package: "{{python_package_name}}-pip"
+python_pip_version: "{{ python_version }}"
+python_pip_default_executable_paths: ["/usr/bin/pip","/usr/local/bin/pip"]
+python_pip_version_executable_path: "/usr/bin/pip{{ python_pip_version }}"

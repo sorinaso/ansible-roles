@@ -1,0 +1,45 @@
+---
+# tasks file for python
+
+- name: "Fail for unsupported python version"
+  fail:
+    msg: "The python version {{ python_version }} is not supported."
+  when: python_version not in python_supported_versions
+
+- name: "Install python{{ python_version }}"
+  package: 
+    name: "{{ item }}"
+  with_items:
+    - "{{ python_packages }}"
+
+- name: "Unset the default python"
+  file:
+    name: "{{ python_default_executable_path }}"
+    state: absent
+  
+- name: "Set the default python to {{ python_version }}"
+  file:
+    src: "{{ python_version_executable_path }}"
+    dest: "{{ python_default_executable_path }}"
+    state: link
+
+- name: "Unset the default python pip"
+  file:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ python_pip_default_executable_paths }}"
+
+  
+- name: "Set the default python pip to python{{ python_version }}"
+  file:
+    src: "{{ python_pip_version_executable_path }}"
+    dest: "{{ item }}"
+    state: link
+  with_items:
+    - "{{ python_pip_default_executable_paths }}"
+
+- name: "Install pipenv"
+  pip:
+    name: pipenv
+  when: python_install_pipenv

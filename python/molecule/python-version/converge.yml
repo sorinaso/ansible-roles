@@ -1,0 +1,32 @@
+---
+
+- name: All Nodes
+  hosts: all
+  roles:
+    - python
+
+  vars:
+    python_version: "{{ lookup('env', 'MOLECULE_PYTHON_VERSION') }}"
+  post_tasks:
+    - name: 
+      debug:
+        msg:
+          python_package_name: "{{ python_package_name }}"
+          python_version_major: "{{ python_version_major }}"
+          python_packages: "{{ python_packages }}"
+          python_default_executable_path: "{{ python_default_executable_path }}"
+          python_version_executable_path: "{{ python_version_executable_path }}"
+          python_pip_package: "{{ python_pip_package }}"
+          python_pip_version: "{{ python_pip_version }}"
+          python_pip_default_executable_paths: "{{ python_pip_default_executable_paths }}"
+          python_pip_version_executable_path: "{{ python_pip_version_executable_path }}"
+
+    - name: "Quick check"
+      shell: |
+        python -V
+        pip -V
+      register: quick_check
+
+    - name: "Print quick check"
+      debug:
+        var: quick_check.stdout_lines

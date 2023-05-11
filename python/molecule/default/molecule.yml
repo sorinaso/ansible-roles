@@ -1,0 +1,20 @@
+---
+
+#dependency:
+#  name: galaxy
+#  options:
+#    role-file: recipes/test-devops-newfold/roles/requirements.yml
+
+driver:
+  name: docker
+
+platforms:
+  - name: role-python-test
+    hostname: role-python-test.asouto.devops.test
+    image: geerlingguy/docker-centos8-ansible:latest
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    prebuild_image: true

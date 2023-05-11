@@ -1,0 +1,18 @@
+---
+
+- name: "Ensure ssh directory exits"
+  file:
+    path: "{{proxmox_vm_ssh_directory}}"
+    state: directory
+    mode: "{{proxmox_vm_ssh_directory_mode}}"
+    owner: "{{proxmox_vm_user}}"
+    group: "{{proxmox_vm_user}}"
+
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: "{{proxmox_vm_user}}"
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - ssh_keys/id_rsa.pub
+ 
