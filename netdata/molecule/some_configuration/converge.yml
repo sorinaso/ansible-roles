@@ -1,0 +1,38 @@
+---
+
+- name: All Nodes
+  hosts: all
+  vars:
+    netdata_health_alarm_notifies:
+      alerta:
+        ALERTA_WEBHOOK_URL: "ALERTA_WEBHOOK_URL"
+        ALERTA_API_KEY: "ALERTA_API_KEY"
+        DEFAULT_RECIPIENT_ALERTA: "DEFAULT_RECIPIENT_ALERTA"
+    netdata_disable_cloud: True
+    netdata_health_configs:
+      10-test.conf: |
+        test1
+        test2
+        test3
+
+  roles:
+    - netdata
+
+  post_tasks:
+    - name: "Configuration files command"
+      shell: |
+        echo "----------------------------------------------\n"
+        echo "{{ netdata_cloud_conf_file }}\n"
+        cat "{{ netdata_cloud_conf_file }}"
+        echo "----------------------------------------------\n"
+        echo "{{ netdata_health_alarm_notify_file }}\n"
+        cat "{{ netdata_health_alarm_notify_file }}"
+        echo "----------------------------------------------\n"
+        echo "{{ netdata_health_conf_directory }}/10-test.conf\n"
+        cat "{{ netdata_health_conf_directory }}/10-test.conf"
+        echo "----------------------------------------------\n"
+      register: echo_config_files
+
+    - name: "Show configuration files"
+      debug:
+        var: echo_config_files.stdout_lines

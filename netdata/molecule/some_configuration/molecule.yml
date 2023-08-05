@@ -1,0 +1,20 @@
+---
+
+#dependency:
+#  name: galaxy
+#  options:
+#    role-file: recipes/test-devops-newfold/roles/requirements.yml
+
+driver:
+  name: docker
+
+platforms:
+  - name: role-netdata-test
+    hostname: role-netdata-some-configuration-test.asouto.devops.test
+    image: molecule-almalinux9:latest
+    pull: false
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    prebuild_image: true

@@ -1,0 +1,6 @@
+{% if 'alerta' in netdata_health_alarm_notifies %}
+SEND_ALERTA="YES"
+ALERTA_WEBHOOK_URL="{{ netdata_health_alarm_notifies.alerta.ALERTA_WEBHOOK_URL }}"
+ALERTA_API_KEY="{{ netdata_health_alarm_notifies.alerta.ALERTA_API_KEY }}"
+DEFAULT_RECIPIENT_ALERTA="{{ netdata_health_alarm_notifies.alerta.DEFAULT_RECIPIENT_ALERTA }}"
+{% endif %}

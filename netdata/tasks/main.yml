@@ -1,0 +1,9 @@
+---
+# tasks file for netdata
+# Setup/install tasks.
+
+- name: "Include installation for {{ ansible_os_family }}."
+  include_tasks: "install.yml" 
+
+- name: "Include installation for {{ ansible_os_family }}."
+  include_tasks: "configure.yml" 

@@ -1,0 +1,6 @@
+---
+
+- name: All Nodes
+  hosts: all
+  roles:
+    - netdata

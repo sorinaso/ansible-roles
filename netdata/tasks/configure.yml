@@ -1,0 +1,24 @@
+- name: "Health alarms notifications"
+  template:
+    src: "health_alarm_notify.conf.j2"
+    dest: "/etc/netdata/health_alarm_notify.conf"
+  when: netdata_health_alarm_notifies
+                                            
+- name: "Cloud configuration"
+  block:
+    - name: "Create{{ netdata_cloud_conf_directory }} directory file"
+      file:
+        path: "{{ netdata_cloud_conf_directory }}"
+        state: directory
+    - name: "Set {{ netdata_cloud_conf_file }} file"
+      template:
+        src: "cloud.conf.j2"
+        dest: "{{ netdata_cloud_conf_file }}"
+  when: netdata_disable_cloud
+
+- name: "Health configurations"
+  copy:
+    dest: "{{ netdata_health_conf_directory }}/{{ item[0] }}"
+    content: "{{ item[1] }}"
+  loop: "{{ netdata_health_configs.items()|list }}"
+  when: netdata_health_configs

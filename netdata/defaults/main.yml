@@ -1,0 +1,15 @@
+---
+# defaults file for netdata
+
+netdata_health_alarm_notifies: {}
+netdata_disable_cloud: False
+netdata_health_configs: {}
+
+# Packages
+netdata_packages: ['netdata']
+
+# Paths
+netdata_cloud_conf_directory: "/var/lib/netdata/cloud.d"
+netdata_cloud_conf_file: "/var/lib/netdata/cloud.d/cloud.conf"
+netdata_health_alarm_notify_file: "/etc/netdata/health_alarm_notify.conf"
+netdata_health_conf_directory: "/etc/netdata/health.d"
