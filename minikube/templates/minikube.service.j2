@@ -1,0 +1,12 @@
+[Unit]
+Description=Minikube
+
+[Service]
+User={{ minikube_user }}
+Group={{ minikube_group }}
+Type=forking
+ExecStart={{ minikube_binary_dest}} start -p default --driver={{ minikube_driver }}
+ExecStop={{ minikube_binary_dest}} delete
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+---
+
+minikube_user: "root"
+minikube_group: "root"
+minikube_binary_url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
+minikube_binary_dest: "/usr/local/bin/minikube"
+minikube_driver: "docker"

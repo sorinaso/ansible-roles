@@ -1,0 +1,19 @@
+- name: Prepare
+  hosts: all
+
+  tasks:
+    - name: "Add Docker repository"
+      yum_repository:
+        name: Docker
+        description: "Docker repository"
+        baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+        gpgcheck: yes
+        gpgkey:
+          - https://download.docker.com/linux/centos/gpg
+        enabled: yes
+
+    - name: "Install docker packages"
+      package:
+        name: ["docker-ce-cli", "containerd.io", "docker-compose-plugin"]
+
+
